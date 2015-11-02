@@ -1,0 +1,43 @@
+{
+  "name": "merge-options",
+  "version": "0.0.42",
+  "description": "Merge Option Objects",
+  "license": "MIT",
+  "repository": "schnittstabil/merge-options",
+  "author": {
+    "name": "Michael Mayer",
+    "email": "michael@schnittstabil.de",
+    "url": "schnittstabil.de"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "xo && nyc ava && nyc report --reporter=text",
+    "clean": "rimraf .nyc_output/ coverage/",
+    "coverage-html": "nyc ava && nyc report --reporter=html",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls"
+  },
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "merge",
+    "options",
+    "deep",
+    "plain",
+    "object",
+    "extend",
+    "clone"
+  ],
+  "devDependencies": {
+    "ava": "*",
+    "coveralls": "^2.11.4",
+    "nyc": "^3.2.2",
+    "rimraf": "^2.4.3",
+    "xo": "*"
+  },
+  "dependencies": {
+    "is-plain-obj": "^1.0.0"
+  }
+}
