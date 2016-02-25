@@ -1,6 +1,6 @@
 {
   "name": "merge-options",
-  "version": "0.0.42",
+  "version": "0.0.64",
   "description": "Merge Option Objects",
   "license": "MIT",
   "repository": "schnittstabil/merge-options",
