@@ -1,4 +1,5 @@
-# merge-options [![Build Status](https://travis-ci.org/schnittstabil/merge-options.svg?branch=master)](https://travis-ci.org/schnittstabil/merge-options) [![Coverage Status](https://coveralls.io/repos/schnittstabil/merge-options/badge.svg?branch=master&service=github)](https://coveralls.io/github/schnittstabil/merge-options?branch=master)
+# merge-options [![Build Status](https://travis-ci.org/schnittstabil/merge-options.svg?branch=master)](https://travis-ci.org/schnittstabil/merge-options) [![Coverage Status](https://coveralls.io/repos/schnittstabil/merge-options/badge.svg?branch=master&service=github)](https://coveralls.io/github/schnittstabil/merge-options?branch=master) [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
+
 
 > Merge Option Objects
 

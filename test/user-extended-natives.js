@@ -1,4 +1,4 @@
-/* eslint no-extend-native:0 */
+/* eslint no-extend-native:0, no-use-extend-native/no-use-extend-native:0 */
 import test from 'ava';
 import fn from '../';
 
