@@ -9,5 +9,4 @@ test('preserve property order', t => {
 	});
 	var target = mergeOptions({}, source);
 	t.is(Object.keys(target).join(''), letters);
-	t.end();
 });

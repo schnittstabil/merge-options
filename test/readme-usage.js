@@ -14,5 +14,4 @@ test('basic examples', t => {
 		mergeOptions({[Symbol.for('key')]: 0}, {[Symbol.for('key')]: 42}),
 		{[Symbol.for('key')]: 42}
 	);
-	t.end();
 });

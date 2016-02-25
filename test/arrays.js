@@ -8,7 +8,6 @@ test('support array values', t => {
 	t.same(result, {array: array2});
 	t.not(result.array, array1);
 	t.not(result.array, array2);
-	t.end();
 });
 
 test('support concatenation', t => {
@@ -18,7 +17,6 @@ test('support concatenation', t => {
 	t.same(result.array, ['foo', 'bar']);
 	t.not(result.array, array1);
 	t.not(result.array, array2);
-	t.end();
 });
 
 test('support concatenation of sparsed arrays', t => {
@@ -30,7 +28,6 @@ test('support concatenation of sparsed arrays', t => {
 	t.same(result.foo, [42, 'unicorns']);
 	t.not(result.array, sparseArray1);
 	t.not(result.array, sparseArray2);
-	t.end();
 });
 
 test('clone option objects', t => {
@@ -40,5 +37,4 @@ test('clone option objects', t => {
 	t.same(result.array, [plainObj2]);
 	t.not(result.array[0], plainObj1);
 	t.not(result.array[0], plainObj2);
-	t.end();
 });

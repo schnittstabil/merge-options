@@ -14,5 +14,4 @@ test('return new option objects', t => {
 	t.not(result[fooKey], source2[fooKey]);
 	t.not(result[fooKey], fooRef1);
 	t.not(result[fooKey], fooRef2);
-	t.end();
 });
