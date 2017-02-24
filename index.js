@@ -1,5 +1,6 @@
 'use strict';
 var isOptionObject = require('is-plain-obj');
+
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 var propIsEnumerable = Object.propertyIsEnumerable;
 var globalThis = this;
