@@ -1,26 +1,26 @@
 'use strict';
-var isOptionObject = require('is-plain-obj');
+const isOptionObject = require('is-plain-obj');
 
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-var propIsEnumerable = Object.propertyIsEnumerable;
-var globalThis = this;
-var defaultMergeOpts = {
+const hasOwnProperty = Object.prototype.hasOwnProperty;
+const propIsEnumerable = Object.propertyIsEnumerable;
+const globalThis = this;
+const defaultMergeOpts = {
 	concatArrays: false
 };
 
-function getEnumerableOwnPropertyKeys(value) {
-	var keys = [];
+const getEnumerableOwnPropertyKeys = value => {
+	const keys = [];
 
-	for (var key in value) {
+	for (const key in value) {
 		if (hasOwnProperty.call(value, key)) {
 			keys.push(key);
 		}
 	}
 
 	if (Object.getOwnPropertySymbols) {
-		var symbols = Object.getOwnPropertySymbols(value);
+		const symbols = Object.getOwnPropertySymbols(value);
 
-		for (var i = 0; i < symbols.length; i++) {
+		for (let i = 0; i < symbols.length; i++) {
 			if (propIsEnumerable.call(value, symbols[i])) {
 				keys.push(symbols[i]);
 			}
@@ -28,7 +28,7 @@ function getEnumerableOwnPropertyKeys(value) {
 	}
 
 	return keys;
-}
+};
 
 function clone(value) {
 	if (Array.isArray(value)) {
@@ -43,9 +43,9 @@ function clone(value) {
 }
 
 function cloneArray(array) {
-	var result = array.slice(0, 0);
+	const result = array.slice(0, 0);
 
-	getEnumerableOwnPropertyKeys(array).forEach(function (key) {
+	getEnumerableOwnPropertyKeys(array).forEach(key => {
 		result[key] = clone(array[key]);
 	});
 
@@ -53,9 +53,9 @@ function cloneArray(array) {
 }
 
 function cloneOptionObject(obj) {
-	var result = Object.getPrototypeOf(obj) === null ? Object.create(null) : {};
+	const result = Object.getPrototypeOf(obj) === null ? Object.create(null) : {};
 
-	getEnumerableOwnPropertyKeys(obj).forEach(function (key) {
+	getEnumerableOwnPropertyKeys(obj).forEach(key => {
 		result[key] = clone(obj[key]);
 	});
 
@@ -66,8 +66,8 @@ function cloneOptionObject(obj) {
  * @param merged {already cloned}
  * @return {cloned Object}
  */
-function mergeKeys(merged, source, keys, mergeOpts) {
-	keys.forEach(function (key) {
+const mergeKeys = (merged, source, keys, mergeOpts) => {
+	keys.forEach(key => {
 		if (key in merged) {
 			merged[key] = merge(merged[key], source[key], mergeOpts);
 		} else {
@@ -76,7 +76,7 @@ function mergeKeys(merged, source, keys, mergeOpts) {
 	});
 
 	return merged;
-}
+};
 
 /**
  * @param merged {already cloned}
@@ -84,15 +84,15 @@ function mergeKeys(merged, source, keys, mergeOpts) {
  *
  * see [Array.prototype.concat ( ...arguments )](http://www.ecma-international.org/ecma-262/6.0/#sec-array.prototype.concat)
  */
-function concatArrays(merged, source, mergeOpts) {
-	var result = merged.slice(0, 0);
-	var resultIndex = 0;
+const concatArrays = (merged, source, mergeOpts) => {
+	let result = merged.slice(0, 0);
+	let resultIndex = 0;
 
-	[merged, source].forEach(function (array) {
-		var indices = [];
+	[merged, source].forEach(array => {
+		const indices = [];
 
 		// result.concat(array) with cloning
-		for (var k = 0; k < array.length; k++) {
+		for (let k = 0; k < array.length; k++) {
 			if (!hasOwnProperty.call(array, k)) {
 				continue;
 			}
@@ -108,13 +108,13 @@ function concatArrays(merged, source, mergeOpts) {
 		}
 
 		// merge non-index keys
-		result = mergeKeys(result, array, getEnumerableOwnPropertyKeys(array).filter(function (key) {
+		result = mergeKeys(result, array, getEnumerableOwnPropertyKeys(array).filter(key => {
 			return indices.indexOf(key) === -1;
 		}), mergeOpts);
 	});
 
 	return result;
-}
+};
 
 /**
  * @param merged {already cloned}
@@ -133,11 +133,11 @@ function merge(merged, source, mergeOpts) {
 }
 
 module.exports = function () {
-	var mergeOpts = merge(clone(defaultMergeOpts), (this !== globalThis && this) || {}, defaultMergeOpts);
-	var merged = {};
+	const mergeOpts = merge(clone(defaultMergeOpts), (this !== globalThis && this) || {}, defaultMergeOpts);
+	let merged = {};
 
-	for (var i = 0; i < arguments.length; i++) {
-		var option = arguments[i];
+	for (let i = 0; i < arguments.length; i++) {
+		const option = arguments[i];
 
 		if (option === undefined) {
 			continue;
