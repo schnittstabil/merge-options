@@ -32,7 +32,7 @@ test('ignore non-enumerable properties', t => {
 
 	if (Object.getOwnPropertySymbols) {
 		const ownPropertySymbols = Object.getOwnPropertySymbols(result);
-		t.same(ownPropertySymbols, []);
+		t.deepEqual(ownPropertySymbols, []);
 	} else {
 		t.false(key in result);
 	}

@@ -17,7 +17,7 @@ test('cloning example', t => {
 		nested: {unicorns: 'many'}
 	};
 	const result = mergeOptions(defaultOpts, opts);
-	t.same(result, opts);
+	t.deepEqual(result, opts);
 	t.is(result.fn, opts.fn);
 	t.is(result.promise, opts.promise);
 	t.not(result.array, opts.array);
@@ -27,11 +27,11 @@ test('cloning example', t => {
 });
 
 test('array.concat example', t => {
-	t.same(
+	t.deepEqual(
 		mergeOptions({patterns: ['src/**']}, {patterns: ['test/**']}),
 		{patterns: ['test/**']}
 	);
-	t.same(
+	t.deepEqual(
 		mergeOptions.call({concatArrays: true}, {patterns: ['src/**']}, {patterns: ['test/**']}),
 		{patterns: ['src/**', 'test/**']}
 	);

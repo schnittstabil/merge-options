@@ -9,7 +9,7 @@ function toString(value) {
 	}
 }
 
-test('throw TypeError on non-option-objects', t => {
+test('throw TypeError on non-option-objects', async t => {
 	const promise = Promise.reject(new Error());
 	[
 		42,
@@ -18,7 +18,7 @@ test('throw TypeError on non-option-objects', t => {
 		promise,
 		Symbol('unicorn'),
 		/regexp/,
-		function noop() {},
+		function () {},
 		null
 	].forEach(value => {
 		t.throws(() => mergeOptions(value), TypeError, toString(value));
@@ -26,11 +26,11 @@ test('throw TypeError on non-option-objects', t => {
 		t.throws(() => mergeOptions({foo: 'bar'}, value), TypeError, toString(value));
 		t.throws(() => mergeOptions(Object.create(null), value), TypeError, toString(value));
 	});
-	t.throws(promise);
+	await t.throws(promise);
 });
 
 test('support `undefined` Option Values', t => {
-	t.same(mergeOptions({foo: true}, {foo: undefined}), {foo: undefined});
+	t.deepEqual(mergeOptions({foo: true}, {foo: undefined}), {foo: undefined});
 });
 
 test('support undefined as target, null as source', t => {
@@ -68,22 +68,19 @@ test('support RegExp as target, RegExp as source', t => {
 });
 
 test('support Promise as target, Number as source', t => {
-	const promise1 = Promise.resolve(42);
+	const promise1 = Promise.resolve(666);
 	const promise2 = 42;
 	const result = mergeOptions({promise: promise1}, {promise: promise2});
 	t.is(result.promise.constructor, Number);
 	t.is(result.promise, 42);
-	t.notThrows(promise1);
 });
 
 test('support Promise as target, Promise as source', async t => {
-	const promise1 = Promise.reject();
+	const promise1 = Promise.resolve(666);
 	const promise2 = Promise.resolve(42);
 	const result = mergeOptions({promise: promise1}, {promise: promise2});
-	const value = await result.promise;
 	t.is(result.promise.constructor, Promise);
-	t.same(value, 42);
-	t.throws(promise1);
+	t.deepEqual(await result.promise, 42);
 });
 
 test('support user-defined object as target, user-defined object as source', t => {

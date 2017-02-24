@@ -8,7 +8,7 @@ test('return new option objects', t => {
 	const fooRef1 = source1[fooKey] = {bar: false};
 	const fooRef2 = source2[fooKey] = {bar: true};
 	const result = mergeOptions(source1, source2);
-	t.same(result, source2);
+	t.deepEqual(result, source2);
 	t.not(result, source2);
 	t.not(result[fooKey], source1[fooKey]);
 	t.not(result[fooKey], source2[fooKey]);
