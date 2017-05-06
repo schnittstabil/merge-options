@@ -17,6 +17,7 @@ const getEnumerableOwnPropertyKeys = value => {
 		}
 	}
 
+	/* istanbul ignore else  */
 	if (Object.getOwnPropertySymbols) {
 		const symbols = Object.getOwnPropertySymbols(value);
 
@@ -91,7 +92,7 @@ const concatArrays = (merged, source, mergeOpts) => {
 	[merged, source].forEach(array => {
 		const indices = [];
 
-		// result.concat(array) with cloning
+		// `result.concat(array)` with cloning
 		for (let k = 0; k < array.length; k++) {
 			if (!hasOwnProperty.call(array, k)) {
 				continue;
@@ -100,14 +101,14 @@ const concatArrays = (merged, source, mergeOpts) => {
 			indices.push(String(k));
 
 			if (array === merged) {
-				// already cloned
+				// Already cloned
 				result[resultIndex++] = array[k];
 			} else {
 				result[resultIndex++] = clone(array[k]);
 			}
 		}
 
-		// merge non-index keys
+		// Merge non-index keys
 		result = mergeKeys(result, array, getEnumerableOwnPropertyKeys(array).filter(key => {
 			return indices.indexOf(key) === -1;
 		}), mergeOpts);

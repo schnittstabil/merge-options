@@ -1,7 +1,7 @@
 import test from 'ava';
 import mergeOptions from '../';
 
-test('cloning example', t => {
+test('cloning example', async t => {
 	const defaultPromise = Promise.reject(new Error());
 	const optsPromise = Promise.resolve('bar');
 	const defaultOpts = {
@@ -22,8 +22,8 @@ test('cloning example', t => {
 	t.is(result.promise, opts.promise);
 	t.not(result.array, opts.array);
 	t.not(result.nested, opts.nested);
-	t.throws(defaultPromise);
-	t.notThrows(optsPromise);
+	await t.throws(defaultPromise);
+	await t.notThrows(optsPromise);
 });
 
 test('array.concat example', t => {
