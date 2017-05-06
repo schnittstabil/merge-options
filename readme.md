@@ -28,7 +28,7 @@ mergeOptions({[Symbol.for('key')]: 0}, {[Symbol.for('key')]: 42})
 
 ## API
 
-### mergeOptions(option1, ...options)<br/>mergeOptions.call(config, option1, ...options)
+### mergeOptions(option1, ...options)<br/>mergeOptions.call(config, option1, ...options)<br/>mergeOptions.apply(config, [option1, ...options])
 
 `mergeOptions` recursively merges one or more *Option Objects* into a new one and returns that. The `options` are merged in order, thus *Option Values* of additional `options` take precedence over previous ones.
 
@@ -76,7 +76,12 @@ Concatenate arrays:
 mergeOptions({src: ['src/**']}, {src: ['test/**']})
 //=> {src: ['test/**']}
 
+// Via call
 mergeOptions.call({concatArrays: true}, {src: ['src/**']}, {src: ['test/**']})
+//=> {src: ['src/**', 'test/**']}
+
+// Via apply
+mergeOptions.apply({concatArrays: true}, [{src: ['src/**']}, {src: ['test/**']}])
 //=> {src: ['src/**', 'test/**']}
 ```
 

@@ -35,4 +35,8 @@ test('array.concat example', t => {
 		mergeOptions.call({concatArrays: true}, {patterns: ['src/**']}, {patterns: ['test/**']}),
 		{patterns: ['src/**', 'test/**']}
 	);
+	t.deepEqual(
+		mergeOptions.apply({concatArrays: true}, [{patterns: ['src/**']}, {patterns: ['test/**']}]),
+		{patterns: ['src/**', 'test/**']}
+	);
 });
