@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Merge Option Objects",
   "license": "MIT",
-  "repository": "schnittstabil/merge-options",
+  "repository": "glcheetham/merge-options",
   "main": "build.js",
   "author": {
     "name": "Michael Mayer",
