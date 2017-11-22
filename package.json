@@ -1,7 +1,7 @@
 {
-  "name": "merge-options",
+  "name": "merge-options-es5",
   "version": "1.0.0",
-  "description": "Merge Option Objects",
+  "description": "ES5-Compatible Merge Option Objects",
   "license": "MIT",
   "repository": "glcheetham/merge-options",
   "main": "build.js",
