@@ -4,6 +4,7 @@
   "description": "Merge Option Objects",
   "license": "MIT",
   "repository": "schnittstabil/merge-options",
+  "main": "build.js",
   "author": {
     "name": "Michael Mayer",
     "email": "michael@schnittstabil.de",
@@ -15,7 +16,8 @@
   "scripts": {
     "test": "xo && nyc ava",
     "clean": "rimraf .nyc_output/ coverage/",
-    "coverage-html": "nyc ava && nyc report --reporter=html"
+    "coverage-html": "nyc ava && nyc report --reporter=html",
+    "build": "babel index.js -o build.js"
   },
   "files": [
     "index.js"
@@ -31,12 +33,14 @@
   ],
   "devDependencies": {
     "ava": "^0.19",
+    "babel-preset-env": "^1.6.1",
     "coveralls": "^2.13",
     "nyc": "^10.3",
     "rimraf": "^2.5",
     "xo": "^0.18"
   },
   "dependencies": {
+    "babel-cli": "^6.26.0",
     "is-plain-obj": "^1.1"
   }
 }
