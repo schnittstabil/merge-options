@@ -94,3 +94,11 @@ test('support user-defined object as target, user-defined object as source', t =
 	t.is(result.user, bob);
 	t.is(result.user.firstName, 'Bob');
 });
+
+test('when merging source object with empty array property into a corresponding object to be always object', t => {
+	const defaultUser = {name: '', city: {id: null}};
+	const bob = {name: 'Bob', city: []};
+	const expected = {name: 'Bob', city: {id: null}};
+	const result = mergeOptions(defaultUser, bob);
+	t.deepEqual(result, expected);
+});
