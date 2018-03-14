@@ -125,6 +125,12 @@ function merge(merged, source, mergeOpts) {
 	if (mergeOpts.concatArrays && Array.isArray(merged) && Array.isArray(source)) {
 		return concatArrays(merged, source, mergeOpts);
 	}
+	// Fix merging empty array into object
+	// merged = {id: null}, source = [];
+	// merge result should be = {id: null}
+	if (source instanceof Array && source.length == 0 && isOptionObject(merged)) {
+		source = {};
+	}
 
 	if (!isOptionObject(source) || !isOptionObject(merged)) {
 		return clone(source);
