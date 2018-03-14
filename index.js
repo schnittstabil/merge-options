@@ -128,7 +128,7 @@ function merge(merged, source, mergeOpts) {
 	// Fix merging empty array into object
 	// merged = {id: null}, source = [];
 	// merge result should be = {id: null}
-	if (source instanceof Array && source.length == 0 && isOptionObject(merged)) {
+	if (Array.isArray(source) && source.length === 0 && isOptionObject(merged)) {
 		source = {};
 	}
 
