@@ -30,11 +30,11 @@
     "clone"
   ],
   "devDependencies": {
-    "ava": "^0.19",
-    "coveralls": "^2.13",
-    "nyc": "^10.3",
+    "ava": "^0.25",
+    "coveralls": "^3.0",
+    "nyc": "^11.6",
     "rimraf": "^2.5",
-    "xo": "^0.18"
+    "xo": "^0.20"
   },
   "dependencies": {
     "is-plain-obj": "^1.1"

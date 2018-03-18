@@ -1,5 +1,5 @@
 import test from 'ava';
-import mergeOptions from '../';
+import mergeOptions from '..';
 
 test('cloning example', async t => {
 	const defaultPromise = Promise.reject(new Error());

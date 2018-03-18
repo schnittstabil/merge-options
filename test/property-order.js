@@ -1,5 +1,5 @@
 import test from 'ava';
-import mergeOptions from '../';
+import mergeOptions from '..';
 
 test('preserve property order', t => {
 	const letters = 'abcdefghijklmnopqrst';

@@ -1,5 +1,5 @@
 import test from 'ava';
-import mergeOptions from '../';
+import mergeOptions from '..';
 
 test('ignore `undefined` Option Objects', t => {
 	t.deepEqual(mergeOptions(undefined), {});

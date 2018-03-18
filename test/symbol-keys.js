@@ -1,5 +1,5 @@
 import test from 'ava';
-import mergeOptions from '../';
+import mergeOptions from '..';
 
 test('return new option objects', t => {
 	const fooKey = Symbol('foo');

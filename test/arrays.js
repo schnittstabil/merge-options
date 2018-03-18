@@ -1,5 +1,5 @@
 import test from 'ava';
-import mergeOptions from '../';
+import mergeOptions from '..';
 
 test('support array values', t => {
 	const array1 = ['foo', 'bar'];
