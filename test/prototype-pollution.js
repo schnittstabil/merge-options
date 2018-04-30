@@ -20,7 +20,7 @@ test('array values (regression test)', t => {
 	const array1 = [];
 	const array2 = [];
 	const pristine = [];
-	defineProtoProperty(array1, {oops: 'It works !'});
+	defineProtoProperty(array2, {oops: 'It works !'});
 	t.is(undefined, pristine.oops);
 	mergeOptions({array: array1}, {array: array2});
 	t.is(undefined, pristine.oops);
