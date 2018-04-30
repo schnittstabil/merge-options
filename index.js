@@ -3,6 +3,13 @@ const isOptionObject = require('is-plain-obj');
 
 const hasOwnProperty = Object.prototype.hasOwnProperty;
 const propIsEnumerable = Object.propertyIsEnumerable;
+const defineProperty = (obj, name, value) => Object.defineProperty(obj, name, {
+	value,
+	writable: true,
+	enumerable: true,
+	configurable: true
+});
+
 const globalThis = this;
 const defaultMergeOpts = {
 	concatArrays: false
@@ -47,7 +54,7 @@ function cloneArray(array) {
 	const result = array.slice(0, 0);
 
 	getEnumerableOwnPropertyKeys(array).forEach(key => {
-		result[key] = clone(array[key]);
+		defineProperty(result, key, clone(array[key]));
 	});
 
 	return result;
@@ -57,7 +64,7 @@ function cloneOptionObject(obj) {
 	const result = Object.getPrototypeOf(obj) === null ? Object.create(null) : {};
 
 	getEnumerableOwnPropertyKeys(obj).forEach(key => {
-		result[key] = clone(obj[key]);
+		defineProperty(result, key, clone(obj[key]));
 	});
 
 	return result;
@@ -69,10 +76,11 @@ function cloneOptionObject(obj) {
  */
 const mergeKeys = (merged, source, keys, mergeOpts) => {
 	keys.forEach(key => {
-		if (key in merged) {
-			merged[key] = merge(merged[key], source[key], mergeOpts);
+		// Do not recurse into prototype chain of merged
+		if (key in merged && merged[key] !== Object.getPrototypeOf(merged)) {
+			defineProperty(merged, key, merge(merged[key], source[key], mergeOpts));
 		} else {
-			merged[key] = clone(source[key]);
+			defineProperty(merged, key, clone(source[key]));
 		}
 	});
 
@@ -102,9 +110,9 @@ const concatArrays = (merged, source, mergeOpts) => {
 
 			if (array === merged) {
 				// Already cloned
-				result[resultIndex++] = array[k];
+				defineProperty(result, resultIndex++, array[k]);
 			} else {
-				result[resultIndex++] = clone(array[k]);
+				defineProperty(result, resultIndex++, clone(array[k]));
 			}
 		}
 
@@ -135,7 +143,7 @@ function merge(merged, source, mergeOpts) {
 
 module.exports = function () {
 	const mergeOpts = merge(clone(defaultMergeOpts), (this !== globalThis && this) || {}, defaultMergeOpts);
-	let merged = {};
+	let merged = {foobar: {}};
 
 	for (let i = 0; i < arguments.length; i++) {
 		const option = arguments[i];
@@ -148,8 +156,8 @@ module.exports = function () {
 			throw new TypeError('`' + option + '` is not an Option Object');
 		}
 
-		merged = merge(merged, option, mergeOpts);
+		merged = merge(merged, {foobar: option}, mergeOpts);
 	}
 
-	return merged;
+	return merged.foobar;
 };
