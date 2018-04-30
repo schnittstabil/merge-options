@@ -32,7 +32,7 @@
   "devDependencies": {
     "ava": "^0.25",
     "coveralls": "^3.0",
-    "nyc": "^11.6",
+    "nyc": "^11.7",
     "rimraf": "^2.5",
     "xo": "^0.20"
   },
