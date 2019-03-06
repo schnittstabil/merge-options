@@ -1,8 +1,8 @@
 'use strict';
 const isOptionObject = require('is-plain-obj');
 
-const hasOwnProperty = Object.prototype.hasOwnProperty;
-const propIsEnumerable = Object.propertyIsEnumerable;
+const {hasOwnProperty} = Object.prototype;
+const {propertyIsEnumerable} = Object;
 const defineProperty = (obj, name, value) => Object.defineProperty(obj, name, {
 	value,
 	writable: true,
@@ -29,7 +29,7 @@ const getEnumerableOwnPropertyKeys = value => {
 		const symbols = Object.getOwnPropertySymbols(value);
 
 		for (let i = 0; i < symbols.length; i++) {
-			if (propIsEnumerable.call(value, symbols[i])) {
+			if (propertyIsEnumerable.call(value, symbols[i])) {
 				keys.push(symbols[i]);
 			}
 		}
@@ -71,8 +71,8 @@ function cloneOptionObject(obj) {
 }
 
 /**
- * @param merged {already cloned}
- * @return {cloned Object}
+ * @param merged already cloned
+ * @return cloned Object
  */
 const mergeKeys = (merged, source, keys, mergeOpts) => {
 	keys.forEach(key => {
@@ -88,8 +88,8 @@ const mergeKeys = (merged, source, keys, mergeOpts) => {
 };
 
 /**
- * @param merged {already cloned}
- * @return {cloned Object}
+ * @param merged already cloned
+ * @return cloned Object
  *
  * see [Array.prototype.concat ( ...arguments )](http://www.ecma-international.org/ecma-262/6.0/#sec-array.prototype.concat)
  */
@@ -126,8 +126,8 @@ const concatArrays = (merged, source, mergeOpts) => {
 };
 
 /**
- * @param merged {already cloned}
- * @return {cloned Object}
+ * @param merged already cloned
+ * @return cloned Object
  */
 function merge(merged, source, mergeOpts) {
 	if (mergeOpts.concatArrays && Array.isArray(merged) && Array.isArray(source)) {
@@ -141,13 +141,11 @@ function merge(merged, source, mergeOpts) {
 	return mergeKeys(merged, source, getEnumerableOwnPropertyKeys(source), mergeOpts);
 }
 
-module.exports = function () {
+module.exports = function (...options) {
 	const mergeOpts = merge(clone(defaultMergeOpts), (this !== globalThis && this) || {}, defaultMergeOpts);
 	let merged = {foobar: {}};
 
-	for (let i = 0; i < arguments.length; i++) {
-		const option = arguments[i];
-
+	for (const option of options) {
 		if (option === undefined) {
 			continue;
 		}

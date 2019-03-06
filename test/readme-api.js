@@ -22,8 +22,8 @@ test('cloning example', async t => {
 	t.is(result.promise, opts.promise);
 	t.not(result.array, opts.array);
 	t.not(result.nested, opts.nested);
-	await t.throws(defaultPromise);
-	await t.notThrows(optsPromise);
+	await t.throwsAsync(defaultPromise);
+	await t.notThrowsAsync(optsPromise);
 });
 
 test('array.concat example', t => {

@@ -4,7 +4,7 @@ import mergeOptions from '..';
 function toString(value) {
 	try {
 		return String(value);
-	} catch (err) {
+	} catch (error) {
 		return typeof value;
 	}
 }
@@ -26,7 +26,8 @@ test('throw TypeError on non-option-objects', async t => {
 		t.throws(() => mergeOptions({foo: 'bar'}, value), TypeError, toString(value));
 		t.throws(() => mergeOptions(Object.create(null), value), TypeError, toString(value));
 	});
-	await t.throws(promise);
+
+	await t.throwsAsync(promise);
 });
 
 test('support `undefined` Option Values', t => {
@@ -87,6 +88,7 @@ test('support user-defined object as target, user-defined object as source', t =
 	function User(firstName) {
 		this.firstName = firstName;
 	}
+
 	const alice = new User('Alice');
 	const bob = new User('Bob');
 	const result = mergeOptions({user: alice}, {user: bob});
