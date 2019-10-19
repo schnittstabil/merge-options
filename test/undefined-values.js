@@ -14,3 +14,10 @@ test('deep undefined values', t => {
 		{nested: {unicorns: 'none'}}
 	);
 });
+
+test('undefined options objects', t => {
+	t.deepEqual(
+		mergeOptions.call({ignoreUndefined: true}, {nested: {unicorns: 'none'}}, {nested: undefined}),
+		{nested: {unicorns: 'none'}}
+	);
+});
