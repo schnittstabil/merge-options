@@ -85,6 +85,25 @@ mergeOptions.apply({concatArrays: true}, [{src: ['src/**']}, {src: ['test/**']}]
 //=> {src: ['src/**', 'test/**']}
 ```
 
+##### config.ignoreUndefined
+
+Type: `boolean`<br/>Default: `false`
+
+Ignore undefined values:
+
+```js
+mergeOptions({foo: 'bar'}, {foo: undefined})
+//=> {foo: undefined}
+
+// Via call
+mergeOptions.call({ignoreUndefined: true}, {foo: 'bar'}, {foo: undefined})
+//=> {foo: 'bar'}
+
+// Via apply
+mergeOptions.apply({ignoreUndefined: true}, [{foo: 'bar'}, {foo: undefined}])
+//=> {foo: 'bar'}
+```
+
 
 ## Related
 

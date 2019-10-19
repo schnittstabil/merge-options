@@ -12,7 +12,8 @@ const defineProperty = (obj, name, value) => Object.defineProperty(obj, name, {
 
 const globalThis = this;
 const defaultMergeOpts = {
-	concatArrays: false
+	concatArrays: false,
+	ignoreUndefined: false
 };
 
 const getEnumerableOwnPropertyKeys = value => {
@@ -76,6 +77,10 @@ function cloneOptionObject(obj) {
  */
 const mergeKeys = (merged, source, keys, mergeOpts) => {
 	keys.forEach(key => {
+		if (typeof source[key] === 'undefined' && mergeOpts.ignoreUndefined) {
+			return;
+		}
+
 		// Do not recurse into prototype chain of merged
 		if (key in merged && merged[key] !== Object.getPrototypeOf(merged)) {
 			defineProperty(merged, key, merge(merged[key], source[key], mergeOpts));
