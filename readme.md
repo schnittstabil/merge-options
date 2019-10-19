@@ -26,6 +26,15 @@ mergeOptions({[Symbol.for('key')]: 0}, {[Symbol.for('key')]: 42})
 //=> {Symbol(key): 42}
 ```
 
+### Usage with custom config
+
+```js
+const mergeOptions = require('merge-options').bind({ignoreUndefined: true});
+
+mergeOptions({foo: 'bar'}, {foo: undefined})
+//=> {foo: 'bar'}
+```
+
 ## API
 
 ### mergeOptions(option1, ...options)<br/>mergeOptions.call(config, option1, ...options)<br/>mergeOptions.apply(config, [option1, ...options])
