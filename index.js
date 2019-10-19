@@ -72,18 +72,21 @@ function cloneOptionObject(obj) {
 }
 
 /**
- * @param merged already cloned
- * @return cloned Object
+ * @param {*} merged already cloned
+ * @param {*} source something to merge
+ * @param {string[]} keys keys to merge
+ * @param {Object} config Config Object
+ * @returns {*} cloned Object
  */
-const mergeKeys = (merged, source, keys, mergeOpts) => {
+const mergeKeys = (merged, source, keys, config) => {
 	keys.forEach(key => {
-		if (typeof source[key] === 'undefined' && mergeOpts.ignoreUndefined) {
+		if (typeof source[key] === 'undefined' && config.ignoreUndefined) {
 			return;
 		}
 
 		// Do not recurse into prototype chain of merged
 		if (key in merged && merged[key] !== Object.getPrototypeOf(merged)) {
-			defineProperty(merged, key, merge(merged[key], source[key], mergeOpts));
+			defineProperty(merged, key, merge(merged[key], source[key], config));
 		} else {
 			defineProperty(merged, key, clone(source[key]));
 		}
@@ -93,12 +96,14 @@ const mergeKeys = (merged, source, keys, mergeOpts) => {
 };
 
 /**
- * @param merged already cloned
- * @return cloned Object
+ * @param {*} merged already cloned
+ * @param {*} source something to merge
+ * @param {Object} config Config Object
+ * @returns {*} cloned Object
  *
  * see [Array.prototype.concat ( ...arguments )](http://www.ecma-international.org/ecma-262/6.0/#sec-array.prototype.concat)
  */
-const concatArrays = (merged, source, mergeOpts) => {
+const concatArrays = (merged, source, config) => {
 	let result = merged.slice(0, 0);
 	let resultIndex = 0;
 
@@ -124,31 +129,33 @@ const concatArrays = (merged, source, mergeOpts) => {
 		// Merge non-index keys
 		result = mergeKeys(result, array, getEnumerableOwnPropertyKeys(array).filter(key => {
 			return indices.indexOf(key) === -1;
-		}), mergeOpts);
+		}), config);
 	});
 
 	return result;
 };
 
 /**
- * @param merged already cloned
- * @return cloned Object
+ * @param {*} merged already cloned
+ * @param {*} source something to merge
+ * @param {Object} config Config Object
+ * @returns {*} cloned Object
  */
-function merge(merged, source, mergeOpts) {
-	if (mergeOpts.concatArrays && Array.isArray(merged) && Array.isArray(source)) {
-		return concatArrays(merged, source, mergeOpts);
+function merge(merged, source, config) {
+	if (config.concatArrays && Array.isArray(merged) && Array.isArray(source)) {
+		return concatArrays(merged, source, config);
 	}
 
 	if (!isOptionObject(source) || !isOptionObject(merged)) {
 		return clone(source);
 	}
 
-	return mergeKeys(merged, source, getEnumerableOwnPropertyKeys(source), mergeOpts);
+	return mergeKeys(merged, source, getEnumerableOwnPropertyKeys(source), config);
 }
 
 module.exports = function (...options) {
-	const mergeOpts = merge(clone(defaultMergeOpts), (this !== globalThis && this) || {}, defaultMergeOpts);
-	let merged = {foobar: {}};
+	const config = merge(clone(defaultMergeOpts), (this !== globalThis && this) || {}, defaultMergeOpts);
+	let merged = {_: {}};
 
 	for (const option of options) {
 		if (option === undefined) {
@@ -159,8 +166,8 @@ module.exports = function (...options) {
 			throw new TypeError('`' + option + '` is not an Option Object');
 		}
 
-		merged = merge(merged, {foobar: option}, mergeOpts);
+		merged = merge(merged, {_: option}, config);
 	}
 
-	return merged.foobar;
+	return merged._;
 };
