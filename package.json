@@ -1,13 +1,12 @@
 {
   "name": "merge-options",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Merge Option Objects",
   "license": "MIT",
   "repository": "schnittstabil/merge-options",
   "author": {
     "name": "Michael Mayer",
-    "email": "michael@schnittstabil.de",
-    "url": "schnittstabil.de"
+    "email": "michael@schnittstabil.de"
   },
   "engines": {
     "node": ">=8"
