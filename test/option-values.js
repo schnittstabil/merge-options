@@ -4,7 +4,7 @@ import mergeOptions from '..';
 function toString(value) {
 	try {
 		return String(value);
-	} catch (error) {
+	} catch (_) {
 		return typeof value;
 	}
 }
@@ -81,7 +81,7 @@ test('support Promise as target, Promise as source', async t => {
 	const promise2 = Promise.resolve(42);
 	const result = mergeOptions({promise: promise1}, {promise: promise2});
 	t.is(result.promise.constructor, Promise);
-	t.deepEqual(await result.promise, 42);
+	t.is(await result.promise, 42);
 });
 
 test('support user-defined object as target, user-defined object as source', t => {

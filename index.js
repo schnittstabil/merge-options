@@ -29,9 +29,9 @@ const getEnumerableOwnPropertyKeys = value => {
 	if (Object.getOwnPropertySymbols) {
 		const symbols = Object.getOwnPropertySymbols(value);
 
-		for (let i = 0; i < symbols.length; i++) {
-			if (propertyIsEnumerable.call(value, symbols[i])) {
-				keys.push(symbols[i]);
+		for (const symbol of symbols) {
+			if (propertyIsEnumerable.call(value, symbol)) {
+				keys.push(symbol);
 			}
 		}
 	}
@@ -127,9 +127,7 @@ const concatArrays = (merged, source, config) => {
 		}
 
 		// Merge non-index keys
-		result = mergeKeys(result, array, getEnumerableOwnPropertyKeys(array).filter(key => {
-			return indices.indexOf(key) === -1;
-		}), config);
+		result = mergeKeys(result, array, getEnumerableOwnPropertyKeys(array).filter(key => !indices.includes(key)), config);
 	});
 
 	return result;
