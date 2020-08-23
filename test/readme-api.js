@@ -1,29 +1,29 @@
 import test from 'ava';
-import mergeOptions from '..';
+import mergeOptions from '../index.js';
 
 test('cloning example', async t => {
 	const defaultPromise = Promise.reject(new Error());
-	const optsPromise = Promise.resolve('bar');
-	const defaultOpts = {
+	const optionsPromise = Promise.resolve('bar');
+	const defaultOptions = {
 		fn: () => false,
 		promise: defaultPromise,
 		array: ['foo'],
 		nested: {unicorns: 'none'}
 	};
-	const opts = {
+	const options = {
 		fn: () => true,
-		promise: optsPromise,
+		promise: optionsPromise,
 		array: ['baz'],
 		nested: {unicorns: 'many'}
 	};
-	const result = mergeOptions(defaultOpts, opts);
-	t.deepEqual(result, opts);
-	t.is(result.fn, opts.fn);
-	t.is(result.promise, opts.promise);
-	t.not(result.array, opts.array);
-	t.not(result.nested, opts.nested);
+	const result = mergeOptions(defaultOptions, options);
+	t.deepEqual(result, options);
+	t.is(result.fn, options.fn);
+	t.is(result.promise, options.promise);
+	t.not(result.array, options.array);
+	t.not(result.nested, options.nested);
 	await t.throwsAsync(defaultPromise);
-	await t.notThrowsAsync(optsPromise);
+	await t.notThrowsAsync(optionsPromise);
 });
 
 test('array.concat example', t => {

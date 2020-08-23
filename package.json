@@ -1,6 +1,7 @@
 {
   "name": "merge-options",
   "version": "2.0.0",
+  "type": "module",
   "description": "Merge Option Objects",
   "license": "MIT",
   "repository": "schnittstabil/merge-options",
@@ -9,7 +10,7 @@
     "email": "michael@schnittstabil.de"
   },
   "engines": {
-    "node": ">=8"
+    "node": ">=14"
   },
   "scripts": {
     "test": "xo && nyc ava",
@@ -29,13 +30,20 @@
     "clone"
   ],
   "devDependencies": {
-    "ava": "^2.4.0",
-    "coveralls": "^3.0.3",
-    "nyc": "^14.1.1",
-    "rimraf": "^3.0.0",
-    "xo": "^0.25.3"
+    "ava": "^3.11.1",
+    "coveralls": "^3.1.0",
+    "nyc": "^15.1.0",
+    "rimraf": "^3.0.2",
+    "xo": "^0.33.0"
   },
   "dependencies": {
-    "is-plain-obj": "^2.0.0"
+    "is-plain-obj": "^2.1.0"
+  },
+  "xo": {
+    "rules": {
+      "import/extensions": "off",
+      "import/no-useless-path-segments": "off",
+      "unicorn/import-index": "off"
+    }
   }
 }

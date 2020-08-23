@@ -1,9 +1,9 @@
 'use strict';
-const isOptionObject = require('is-plain-obj');
+import isOptionObject from 'is-plain-obj';
 
 const {hasOwnProperty} = Object.prototype;
 const {propertyIsEnumerable} = Object;
-const defineProperty = (obj, name, value) => Object.defineProperty(obj, name, {
+const defineProperty = (object, name, value) => Object.defineProperty(object, name, {
 	value,
 	writable: true,
 	enumerable: true,
@@ -11,7 +11,7 @@ const defineProperty = (obj, name, value) => Object.defineProperty(obj, name, {
 });
 
 const globalThis = this;
-const defaultMergeOpts = {
+const defaultMergeOptions = {
 	concatArrays: false,
 	ignoreUndefined: false
 };
@@ -61,11 +61,11 @@ function cloneArray(array) {
 	return result;
 }
 
-function cloneOptionObject(obj) {
-	const result = Object.getPrototypeOf(obj) === null ? Object.create(null) : {};
+function cloneOptionObject(object) {
+	const result = Object.getPrototypeOf(object) === null ? Object.create(null) : {};
 
-	getEnumerableOwnPropertyKeys(obj).forEach(key => {
-		defineProperty(result, key, clone(obj[key]));
+	getEnumerableOwnPropertyKeys(object).forEach(key => {
+		defineProperty(result, key, clone(object[key]));
 	});
 
 	return result;
@@ -151,8 +151,8 @@ function merge(merged, source, config) {
 	return mergeKeys(merged, source, getEnumerableOwnPropertyKeys(source), config);
 }
 
-module.exports = function (...options) {
-	const config = merge(clone(defaultMergeOpts), (this !== globalThis && this) || {}, defaultMergeOpts);
+export default function mergeOptions(...options) {
+	const config = merge(clone(defaultMergeOptions), (this !== globalThis && this) || {}, defaultMergeOptions);
 	let merged = {_: {}};
 
 	for (const option of options) {
@@ -168,4 +168,4 @@ module.exports = function (...options) {
 	}
 
 	return merged._;
-};
+}

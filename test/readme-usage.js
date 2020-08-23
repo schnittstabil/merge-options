@@ -1,5 +1,5 @@
 import test from 'ava';
-import mergeOptions from '..';
+import mergeOptions from '../index.js';
 
 test('basic examples', t => {
 	t.deepEqual(

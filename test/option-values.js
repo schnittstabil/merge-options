@@ -1,10 +1,10 @@
 import test from 'ava';
-import mergeOptions from '..';
+import mergeOptions from '../index.js';
 
 function toString(value) {
 	try {
 		return String(value);
-	} catch (_) {
+	} catch {
 		return typeof value;
 	}
 }
@@ -21,10 +21,10 @@ test('throw TypeError on non-option-objects', async t => {
 		function () {},
 		null
 	].forEach(value => {
-		t.throws(() => mergeOptions(value), TypeError, toString(value));
-		t.throws(() => mergeOptions({}, value), TypeError, toString(value));
-		t.throws(() => mergeOptions({foo: 'bar'}, value), TypeError, toString(value));
-		t.throws(() => mergeOptions(Object.create(null), value), TypeError, toString(value));
+		t.throws(() => mergeOptions(value), {instanceOf: TypeError}, toString(value));
+		t.throws(() => mergeOptions({}, value), {instanceOf: TypeError}, toString(value));
+		t.throws(() => mergeOptions({foo: 'bar'}, value), {instanceOf: TypeError}, toString(value));
+		t.throws(() => mergeOptions(Object.create(null), value), {instanceOf: TypeError}, toString(value));
 	});
 
 	await t.throwsAsync(promise);

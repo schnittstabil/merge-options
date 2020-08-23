@@ -1,5 +1,5 @@
 import test from 'ava';
-import mergeOptions from '..';
+import mergeOptions from '../index.js';
 
 test('support array values', t => {
 	const array1 = ['foo', 'bar'];
@@ -51,10 +51,10 @@ test('support concatenation of sparsed arrays via apply', t => {
 });
 
 test('clone option objects', t => {
-	const plainObj1 = {value: 'foo'};
-	const plainObj2 = {value: 'bar'};
-	const result = mergeOptions({array: [plainObj1]}, {array: [plainObj2]});
-	t.deepEqual(result.array, [plainObj2]);
-	t.not(result.array[0], plainObj1);
-	t.not(result.array[0], plainObj2);
+	const plainObject1 = {value: 'foo'};
+	const plainObject2 = {value: 'bar'};
+	const result = mergeOptions({array: [plainObject1]}, {array: [plainObject2]});
+	t.deepEqual(result.array, [plainObject2]);
+	t.not(result.array[0], plainObject1);
+	t.not(result.array[0], plainObject2);
 });
