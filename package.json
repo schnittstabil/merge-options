@@ -1,7 +1,6 @@
 {
   "name": "merge-options",
   "version": "3.0.0",
-  "type": "module",
   "description": "Merge Option Objects",
   "license": "MIT",
   "repository": "schnittstabil/merge-options",
@@ -17,8 +16,15 @@
     "clean": "rimraf .nyc_output/ coverage/",
     "coverage-html": "nyc ava && nyc report --reporter=html"
   },
+  "main": "./index.js",
+  "exports": {
+    "require": "./index.js",
+    "import": "./index.mjs"
+  },
   "files": [
-    "index.js"
+    "index.d.ts",
+    "index.js",
+    "index.mjs"
   ],
   "keywords": [
     "merge",

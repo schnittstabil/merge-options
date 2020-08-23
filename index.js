@@ -1,5 +1,5 @@
 'use strict';
-import isOptionObject from 'is-plain-obj';
+const isOptionObject = require('is-plain-obj');
 
 const {hasOwnProperty} = Object.prototype;
 const {propertyIsEnumerable} = Object;
@@ -151,7 +151,7 @@ function merge(merged, source, config) {
 	return mergeKeys(merged, source, getEnumerableOwnPropertyKeys(source), config);
 }
 
-export default function mergeOptions(...options) {
+module.exports = function (...options) {
 	const config = merge(clone(defaultMergeOptions), (this !== globalThis && this) || {}, defaultMergeOptions);
 	let merged = {_: {}};
 
@@ -168,4 +168,4 @@ export default function mergeOptions(...options) {
 	}
 
 	return merged._;
-}
+};

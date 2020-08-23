@@ -1,5 +1,5 @@
-import test from 'ava';
-import mergeOptions from '../index.js';
+const test = require('ava');
+const mergeOptions = require('..');
 
 test('basic examples', t => {
 	t.deepEqual(

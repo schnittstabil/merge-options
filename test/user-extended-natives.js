@@ -1,6 +1,6 @@
 /* eslint no-extend-native:0, no-use-extend-native/no-use-extend-native:0 */
-import test from 'ava';
-import fn from '../index.js';
+const test = require('ava');
+const fn = require('..');
 
 test('ignore non-own properties', t => {
 	const optionObject = {foo: 'bar'};
