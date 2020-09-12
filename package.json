@@ -9,7 +9,7 @@
     "email": "michael@schnittstabil.de"
   },
   "engines": {
-    "node": ">=12"
+    "node": ">=10"
   },
   "scripts": {
     "test": "xo && nyc ava",
