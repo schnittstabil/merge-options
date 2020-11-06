@@ -1,1 +1,3 @@
-export default function (...options: any[]): any;
+export = mergeOptions;
+
+declare function mergeOptions<T>(...options: any[]): T;
