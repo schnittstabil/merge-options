@@ -1,3 +1,2 @@
+declare function mergeOptions(...options: any[]): any;
 export = mergeOptions;
-
-declare function mergeOptions(...options: any[]);
