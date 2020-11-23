@@ -1,3 +1,3 @@
 export = mergeOptions;
 
-declare function mergeOptions<T>(...options: any[]): T;
+declare function mergeOptions(...options: any[]);
